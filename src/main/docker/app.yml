@@ -1,0 +1,15 @@
+version: '3'
+services:
+  sos-gsg-app:
+    image: sos-gatling-sonar-gatling
+    container_name: sos-gatling-sonar-gatling
+    environment:
+      - SOS_SLEEP=10 # gives time for the database to boot before the application
+    ports:
+      - 8084:8084
+  sos-sonar:
+    container_name: sos-sonarqube
+    image: sonarqube:6.2-alpine
+    ports:
+       - 9000:9000
+       - 9092:9092

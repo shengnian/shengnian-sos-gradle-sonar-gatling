@@ -1,0 +1,63 @@
+buildscript {
+    repositories {
+        maven { url 'http://repo2.maven.org/maven2' }
+    }
+    dependencies {
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.3"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
+    }
+}
+
+group 'shengnianos'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+apply from: 'gradle/docker.gradle'
+
+jar {
+    baseName = "sos-gradle-sonar-gatling"
+    version = "0.1.0"
+}
+
+repositories {
+    maven { url 'http://repo2.maven.org/maven2' }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+test {
+    include '**/*UnitTest*'
+    include '**/*IntTest*'
+
+    // uncomment if the tests reports are not generated
+    // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
+    // ignoreFailures true
+    reports.html.enabled = false
+}
+
+apply plugin: "org.sonarqube"
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = '0.7.9'
+//    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+//        csv.enabled false
+//        html.destination "${buildDir}/jacocoHtml"
+//        xml.enabled = true
+    }
+}
+
