@@ -13,3 +13,9 @@ Go to http://localhost:9000/
 
 ## gatling
 
+Change the gatling.gradle line 28 HelloSimulation to your self simulation name, 
+and run 
+
+`gradlew gatlingRun`
+
+

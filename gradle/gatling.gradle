@@ -25,7 +25,7 @@ task gatlingRun(dependsOn:'manifestJar') {
     description = 'Run a single Gatling simulation. You must write the name of your Gatling simulation.'
 
     doLast {
-        def String gatlingSimulationClass = "WriteTheNameOfYourGatlingSimulation"
+        def String gatlingSimulationClass = "HelloSimulation"
         if (project.hasProperty('gatlingSimulationClass')) {
             gatlingSimulationClass = project.property('gatlingSimulationClass')
         }
